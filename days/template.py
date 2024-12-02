@@ -12,17 +12,13 @@ def getResultPart2(data, log_level):
 
 def play(input_data, day_part, log_level):
 
-
     #Initialize and read input
-
 
     parsed_data = []
 
-
     print("Day template begins!")
 
-
-    if day_part == 1:
+    if day_part == 0 or day_part == 1:
         #Result tuple format is (success <bool>, result <string>)
         resultPart1 = getResultPart1(parsed_data, log_level)
 
@@ -31,8 +27,7 @@ def play(input_data, day_part, log_level):
         else:
             print("Unable to find answer to Part 1")
 
-
-    if day_part == 2:
+    if day_part == 0 or day_part == 2:
         #Result tuple format is (success <bool>, result <string>)
         resultPart2 = getResultPart2(parsed_data, log_level)
 

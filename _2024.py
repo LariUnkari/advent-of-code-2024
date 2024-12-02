@@ -15,8 +15,27 @@ def get_day_input():
 
     print(f"Select day (1-{DAY_COUNT:d}), then press enter.\n"+
           "Give an empty input or 'exit' to end program\n")
+    
+    day = 0
+    while day < 1:
+        value = input("Choose the day: ")
 
-    return input("Choose the day: ")
+        if len(value) == 0 or value.strip() == "exit":
+            return 0
+
+        try:
+            day = int(value)
+
+            if day < 1:
+                print(f"Invalid day value {day} given!\n")
+            elif day > DAY_COUNT:
+                print(f"Day {day} has not been reached yet!\n")
+            else:
+                break
+        except ValueError:
+            print(f"Invalid input '{value}' given!")
+            
+    return day
 
 def get_data_input():
     """Takes in user input for data choice"""
@@ -35,30 +54,16 @@ def get_program_and_input(day_input, data_input):
     
     mod = None
     modName = "day{0:02d}"
-
-    try:
-        value = int(day_input)
-
-        if value < 1:
-            print(f"Invalid day value {value} given!\n")
-            return (None, None)
-        elif value > DAY_COUNT:
-            print(f"Day {value} has not been reached yet!\n")
-            return (None, None)
-        else:
-            day = modName.format(value)
-    except ValueError:
-        print(f"Invalid input {day_input} given!")
-        return (None, None)
+    day = modName.format(day_input)
     
     try:
         mod = importlib.import_module("."+day, package='days')
-        print(f"Day {value} given, imported {day} module")
+        print(f"Day {day_input} given, imported {mod.__name__} module")
     except Exception as e:
-        print(f"Day {value} given. Error importing module:\n{e}")
+        print(f"Day {day_input} given. Error importing module:\n{e}")
         return (None, None)
 
-    filePath = "data/{0}".format(data_input.format(value))
+    filePath = "data/{0}".format(data_input.format(day_input))
 
     try:
         data = open(filePath, "r")
@@ -72,14 +77,12 @@ def get_program_and_input(day_input, data_input):
 
 #Program
 
-DAY_INPUT = "0"
-
 print("Advent of Code 2024 by Lari Unkari\n\n")
 
 while True:
     DAY_INPUT = get_day_input()
     
-    if len(DAY_INPUT) == 0 or DAY_INPUT.strip() == "exit":
+    if DAY_INPUT == 0:
         break
     
     print("")
@@ -99,7 +102,11 @@ while True:
             print(f"No input file found for {DAY_INPUT}")
             break
         
-        part_input = modules.userInput.get_int_input_constrained("\nWhich part to run? 1-2 (defaults to 2): ", 1, 2, 2)
+        part_input = modules.userInput.get_int_input_constrained("\nWhich part to run? 2, 1, or 0 as in both (defaults to both): ", 0, 2, 0)
+        if not(part_input[0]) or part_input[1] == 0:
+            print("Running both parts")
+        else:
+            print(f"Running part {part_input[1]}")
 
         log_level_input = modules.userInput.get_int_input("\nLog level (defaults to level zero): ", None)
 

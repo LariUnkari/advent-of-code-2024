@@ -27,14 +27,21 @@ def get_int_input(prompt, invalid_prompt):
 def get_int_input_constrained(prompt, value_min, value_max, value_default):
     """Get integer input from user, constrained within min-max (inclusive),
        default for unparseable values, returns a tuple (is_valid, input_value)"""
+       
+    txt = input(prompt)
 
-    input_value = 0
-    while input_value < 1:
-        txt = input(prompt)
-        try:
-            input_value = min(max(int(txt), value_min), value_max)
-        except ValueError:
-            input_value = value_default
+    try:
+        input_value = int(txt)
+    except ValueError:
+        return (True, value_default)
+    except Exception as e:
+        return (False, f"Unhandled exception: {e}")
+
+    if input_value < value_min:
+        return (True, value_min)
+
+    if input_value > value_max:
+        return (True, value_max)
 
     return (True, input_value)
 

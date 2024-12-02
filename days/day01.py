@@ -65,7 +65,7 @@ def play(input_data, day_part, log_level):
 
     print("Day 1 begins!")
     
-    if day_part == 1:
+    if day_part == 0 or day_part == 1:
         #Result tuple format is (success <bool>, result <string>)
         resultPart1 = getResultPart1(left, right, log_level)
 
@@ -75,7 +75,7 @@ def play(input_data, day_part, log_level):
             print("Unable to find answer to Part 1")
 
 
-    if day_part == 2:
+    if day_part == 0 or day_part == 2:
         #Result tuple format is (success <bool>, result <string>)
         resultPart2 = getResultPart2(left, right, log_level)
 
