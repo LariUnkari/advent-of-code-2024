@@ -38,7 +38,7 @@ def getResultPart2(left, right, log_level):
         
         if log_level >= 2:
             print(f"{value} from left appears {num} times on the right")
-        elif log_level == 1 & num > 0:
+        elif log_level == 1 and num > 0:
             print(f"Found {value} from left {num} times on the right")
 
         scores.append(value * num)
