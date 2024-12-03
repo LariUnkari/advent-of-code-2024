@@ -28,21 +28,21 @@ def getResultPart2(data, log_level):
     parsed_data = []
 
     for line in data:
-        matches = re.findall("mul\((\d{1,3}),(\d{1,3})\)|(do\(\))|(don't\(\))", line)
+        matches = re.finditer("mul\((\d{1,3}),(\d{1,3})\)|(do\(\))|(don't\(\))", line)
 
         for i, m in enumerate(matches):
-            if m[0] != '':
-                if log_level >= 2:
-                    print(f"Found multiplication operation at match {i}")
-                parsed_data.append(("mul", int(m[0]), int(m[1])))
-            elif m[2] == 'do()':
+            if m.group() == 'do()':
                 if log_level >= 2:
                     print(f"Found enabling operation at match {i}")
                 parsed_data.append(("do()", True))
-            elif m[3] == "don't()":
+            elif m.group() == "don't()":
                 if log_level >= 2:
                     print(f"Found disabling operation at match {i}")
                 parsed_data.append(("don't()", False))
+            else:
+                if log_level >= 2:
+                    print(f"Found multiplication operation at match {i}: {m.groups()[:2]}")
+                parsed_data.append(("mul", int(m.groups()[0]), int(m.groups()[1])))
             
     if log_level >= 1:
         print(f"Matches:\n{parsed_data}")
