@@ -128,15 +128,15 @@ def play(input_data, day_part, log_level):
         resultPart1 = getResultPart1(parsed_data, log_level)
 
         if (resultPart1[0]):
-            print(f"Answer to Part 1 is {resultPart1[1]}")
+            print(f"Answer to Part 1 is {resultPart1[1]}\n")
         else:
-            print("Unable to find answer to Part 1")
+            print("Unable to find answer to Part 1\n")
             
     if day_part == 0 or day_part == 2:
         #Result tuple format is (success <bool>, result <string>)
         resultPart2 = getResultPart2(parsed_data, log_level)
 
         if (resultPart2[0]):
-            print(f"Answer to Part 2 is {resultPart2[1]}")
+            print(f"Answer to Part 2 is {resultPart2[1]}\n")
         else:
-            print("Unable to find answer to Part 2")
+            print("Unable to find answer to Part 2\n")
