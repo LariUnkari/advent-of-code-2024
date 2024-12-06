@@ -45,7 +45,7 @@ def get_data_input():
     INPUT = input("Select data: ")
 
     if INPUT == "test":
-        return "testdata.txt"
+        return "test{0:02d}.txt"
 
     return "input{0:02d}.txt"
 
